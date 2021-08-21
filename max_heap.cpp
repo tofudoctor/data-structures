@@ -18,7 +18,7 @@ public:
 };
 max_heap::max_heap()
 {
-    node.push_back(-1);
+    node.push_back(NULL);
 }
 int max_heap::search(int d)
 {
@@ -51,7 +51,7 @@ void max_heap::adjust_to_botton(int current_index, int last_index)
     int tmp = node[current_index];
     while (child_index <= last_index)
     {
-        if ((current_index < last_index) && (node[child_index + 1] > node[child_index]) && (child_index + 1 <= node.size() - 1))
+        if ((node[child_index + 1] > node[child_index]) && (child_index + 1 <= node.size() - 1))
         {
             child_index++;
         }
