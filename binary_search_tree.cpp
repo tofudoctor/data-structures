@@ -22,6 +22,7 @@ private:
     void in(node *x);
     void post(node *x);
     void print_2d(node *x, int space);
+    int hight(node *x);
 
 public:
     bst();
@@ -129,10 +130,11 @@ void bst::print_2d(node *x, int space)
     space += 10;
     print_2d(x->r, space);
     cout << "\n";
-    for (int i = 10; i < space;i++){
+    for (int i = 10; i < space; i++)
+    {
         cout << ' ';
     }
-    cout <<x->data<< "\n";
+    cout << x->data << "\n";
     print_2d(x->l, space);
 }
 void bst::pre(node *x)
@@ -162,6 +164,19 @@ void bst::post(node *x)
         cout << x->data << " ";
     }
 }
+int bst::hight(node *x)
+{
+    if (x == NULL)
+    {
+        return -1;
+    }
+    else
+    {
+        int rhight = hight(x->r);
+        int lhight = hight(x->l);
+        return max(lhight, rhight) + 1;
+    }
+}
 void bst::show(string s)
 {
     if (s == "in")
@@ -175,6 +190,10 @@ void bst::show(string s)
     else if (s == "post")
     {
         post(root);
+    }
+    else if (s == "high")
+    {
+        cout << hight(root);
     }
     else
     {
@@ -195,11 +214,13 @@ int main()
     tree.add(52);
     tree.add(20);
     tree.add(3);
-    tree.show("2d");
+    tree.show("high");
     tree.free(52);
-    tree.show("2d");
+    tree.show("high");
     tree.free(35);
-    tree.show("2d");
+    tree.show("high");
+    tree.free(3);
+    tree.show("high");
     //tree.show("in");
     //tree.show("pre");
     //tree.show("post");
